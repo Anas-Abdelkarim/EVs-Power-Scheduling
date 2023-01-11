@@ -1,0 +1,18 @@
+##########################################################
+#                    بسم الله الرحمن الرحيم                       
+#This is a program is written in AMPL to descibe the opt- 
+#imzation appeared  in equation  18 of paper:            
+#Using Convex Optimization to Schedule V2G EV Power Profi-
+#les with Conditional Minimum Energy Boundary
+#Date         : 10/1/2023                      
+#Version      : v1.0                           
+#Written by   : Anas Abdelkarim               
+#File name    : Model	                      
+##########################################################
+
+
+
+solve;
+
+#SHOW RESULTS
+display cost_function_AT_eq_2, P_grid, P_1, P_2, P_3, E_1, E_2, E_3, E_R1_1, E_R2_1, P_ch_R1_1, P_ch_R2_1, P_dis_R2_1, _total_solve_time;  

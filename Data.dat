@@ -1,0 +1,64 @@
+##########################################################
+#                    بسم الله الرحمن الرحيم                       
+#This is a program is written in AMPL to descibe the opt- 
+#imzation appeared  in equation  18 of paper:            
+#Using Convex Optimization to Schedule V2G EV Power Profi-
+#les with Conditional Minimum Energy Boundary
+#Date         : 10/1/2023                      
+#Version      : v1.0                           
+#Written by   : Anas Abdelkarim               
+#File name    : Model	                      
+##########################################################
+
+
+
+param N:=  96  ;
+param Ts := .25; # hour
+param num_EV :=  96  ;
+
+# see Table 1 in the paper
+# the maximum battery energy
+param E_max_1 := 20; #kWh
+param E_max_2 := 20; #kWh
+param E_max_3 := 20; #kWh
+
+# the minimum battery energy
+param E_min_1 := 11; #kWh
+param E_min_2 := 11; #kWh
+param E_min_3 := 0 ; #kWh
+
+# connect instant of EVs
+param k_c_1 := 8;
+param k_c_2 := 12;
+param k_c_3 := 14;
+
+# the initial battery energy
+param E_0_1 := 5; #kWh
+param E_0_2 := 12; #kWh
+param E_0_3 := 10; #kWh
+
+# disconnectinstant of EVs
+param k_d_1 := 93;
+param k_d_2 := 93;
+param k_d_3 := 93;
+
+
+# the target battery energy
+param E_t_1 := 18; #kWh
+param E_t_2 := 18; #kWh
+param E_t_3 := 18; #kWh
+
+# the maximum discharging power of EV
+param p_dis_max_1 := -3.68; #kW
+param p_dis_max_2 := -3.68; #kW
+param p_dis_max_3 := 0; #kW
+
+# the maximum charging power of EV
+param p_ch_max_1 := 3.68; #kW
+param p_ch_max_2 := 3.68; #kW
+param p_ch_max_3 := 3.68; #kW
+
+param P_load: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95:=
+1 5.43 5.42 5.38 5.17 5.44 5.38 5.68 5.68 5.68 5.68 5.66 7.09 9.49 11.89 14.15 15.68 16.42 16.74 16.74 16.74 16.74 16.76 16.41 15.77 14.23 13.53 12.06 10.74 9.71 8.51 7.53 6.71 6.18 6.17 5.94 6.07 7.11 7.35 7.44 7.44 7.44 7.44 7.44 7.44 7.44 7.91 8.39 9.86 10.49 12.45 14.58 15.94 18.02 19.93 23.48 25.87 27.24 28.55 29.63 30.81 32.02 33.01 33.96 34.53 34.58 34.58 33.74 31.69 29.43 27.2 25.24 21.6 18.93 16.25 12.94 11.37 9.29 8.19 7.13 6.4 6.2 5.49 4.94 5.16 5.01 4.92 4.92 4.92 4.92 4.43 5.42 5.67 5.77 6.18 6.18 6.18;
+
+param P_PV: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95:= 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;		
